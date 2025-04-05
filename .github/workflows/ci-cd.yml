@@ -1,8 +1,9 @@
 name: CI/CD Pipeline
 
 on:
-  push:
-    branches: [ main ]
+  workflow_dispatch:
+  # push:
+  #   branches: [ main ]
     paths-ignore:
       - 'kubernetes/deployment.yaml'  # Ignore changes to this file to prevent loops
   pull_request:
@@ -100,7 +101,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_REGISTRY_TOKEN }}
+          password: ${{ secrets.GHCR_TOKEN }}
       
       - name: Extract metadata for Docker
         id: meta
